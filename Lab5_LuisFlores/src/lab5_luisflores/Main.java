@@ -546,6 +546,11 @@ public class Main extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton1.setText("Modificar Campista");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton2.setText("Eliminar Campista");
@@ -557,6 +562,11 @@ public class Main extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton3.setText("Modificar Yeison");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton4.setText("Eliminar Yeison");
@@ -600,9 +610,9 @@ public class Main extends javax.swing.JFrame {
                         .addGap(45, 45, 45)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
+                        .addGap(135, 135, 135)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
+                        .addGap(52, 52, 52)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(191, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -889,6 +899,49 @@ public class Main extends javax.swing.JFrame {
                 t3.setModel(modelo);
         }
     }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+       
+        try {
+            if(t3.getSelectedRow()>=0){
+                 DefaultTableModel modelo = (DefaultTableModel) t3.getModel();
+                  String nombre2 = JOptionPane.showInputDialog(this, "Ingrese nuevo Nombre  : ");
+                modelo.setValueAt(nombre2, t3.getSelectedRow(), 0);
+                int edad=Integer.parseInt(JOptionPane.showInputDialog(this, " Ingrese Nueva Edad: "));
+                modelo.setValueAt(edad, t3.getSelectedRow(), 1);
+                int cant=Integer.parseInt(JOptionPane.showInputDialog(this, " Ingrese Nueva Cantidad: "));
+                modelo.setValueAt(cant, t3.getSelectedRow(), 2);
+            }
+            
+            
+            
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(this, "Ocurrio Error");
+        }
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        
+        try {
+            if(t2.getSelectedRow()>=0){
+                 DefaultTableModel modelo = (DefaultTableModel) t2.getModel();
+                 String nombre3 = JOptionPane.showInputDialog(this, "Ingrese nuevo Nombre  : ");
+                modelo.setValueAt(nombre3, t2.getSelectedRow(), 0);
+                int edad=Integer.parseInt(JOptionPane.showInputDialog(this, " Ingrese Nueva Edad: "));
+                modelo.setValueAt(edad, t2.getSelectedRow(), 1);
+                String tipo=JOptionPane.showInputDialog(this, " Ingrese Nueva Tipo: ");
+                modelo.setValueAt(tipo, t2.getSelectedRow(), 2);
+                String estado=JOptionPane.showInputDialog(this, " Ingrese Nuevo Estado: ");
+                modelo.setValueAt(estado, t2.getSelectedRow(), 3);
+            }
+            
+            
+            
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(this, "Ocurrio Error");
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
