@@ -362,6 +362,11 @@ public class Main extends javax.swing.JFrame {
 
         a_guardar1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         a_guardar1.setText("Guardar");
+        a_guardar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                a_guardar1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -707,16 +712,22 @@ public class Main extends javax.swing.JFrame {
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
          //ELIMINAR
-        if(t1.getSelectedRow()>=0){
+         try {
+            if(t1.getSelectedRow()>=0){
               DefaultTableModel modelo = (DefaultTableModel) t1.getModel();
                 modelo.removeRow(t1.getSelectedRow());
                 t1.setModel(modelo);
         }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"Ocurrio un ERROR");
+        }
+        
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
-          if (t1.getSelectedRow() >= 0) {
+        try {
+             if (t1.getSelectedRow() >= 0) {
                 DefaultTableModel modelo = (DefaultTableModel) t1.getModel();
 
                 String obj = JOptionPane.showInputDialog(this, "Ingrese nuevo Porcentaje  : ");
@@ -726,10 +737,20 @@ public class Main extends javax.swing.JFrame {
                 t1.setModel(modelo);
             }
          //MODIFICAR
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrio Error");
+        }
+         
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void a_campistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_campistaMouseClicked
         // TODO add your handling code here:
+        a_super.setEnabled(true);
+        a_normal.setEnabled(true);
+        a_viva.setEnabled(true);
+        a_muerta.setEnabled(true);
+        label9.setEnabled(true);
         label10.setEnabled(false);
         a_cantidad.setEnabled(false);
     }//GEN-LAST:event_a_campistaMouseClicked
@@ -741,7 +762,18 @@ public class Main extends javax.swing.JFrame {
         a_viva.setEnabled(false);
         a_muerta.setEnabled(false);
         label9.setEnabled(false);
+          label10.setEnabled(true);
+        a_cantidad.setEnabled(true);
     }//GEN-LAST:event_a_yeisonMouseClicked
+
+    private void a_guardar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_guardar1MouseClicked
+        // TODO add your handling code here:
+        try {
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrio un Error Intente De Nuevo");
+        }
+    }//GEN-LAST:event_a_guardar1MouseClicked
 
     /**
      * @param args the command line arguments
