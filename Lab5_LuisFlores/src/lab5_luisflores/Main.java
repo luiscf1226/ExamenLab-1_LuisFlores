@@ -506,6 +506,12 @@ public class Main extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel16.setText("Lista Personas");
 
+        a_campistas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                a_campistasItemStateChanged(evt);
+            }
+        });
+
         t2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -518,6 +524,12 @@ public class Main extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setText("Yeisons");
+
+        a_yei.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                a_yeiItemStateChanged(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel18.setText("Campistas");
@@ -537,12 +549,22 @@ public class Main extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton2.setText("Eliminar Campista");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton3.setText("Modificar Yeison");
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton4.setText("Eliminar Yeison");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -819,6 +841,54 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ocurrio un Error Intente De Nuevo");
         }
     }//GEN-LAST:event_a_guardar1MouseClicked
+
+    private void a_campistasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_a_campistasItemStateChanged
+       
+        if (evt.getStateChange() == 2) {
+            Campistas c = (Campistas) a_campistas.getSelectedItem();
+            Object[] newrow = {
+                c.getNombre(), c.getEdad(), c.getTipo(), c.getEstado()
+            };
+            DefaultTableModel modelo
+                    = (DefaultTableModel) t2.getModel();
+            modelo.addRow(newrow);
+            t2.setModel(modelo);
+
+        }
+    }//GEN-LAST:event_a_campistasItemStateChanged
+
+    private void a_yeiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_a_yeiItemStateChanged
+        // TODO add your handling code here:
+         if (evt.getStateChange() == 2) {
+           YeizonRecio y = (YeizonRecio) a_yei.getSelectedItem();
+            Object[] newrow = {
+                y.getNombre(), y.getEdad(),y.getCantidad()
+            };
+            DefaultTableModel modelo
+                    = (DefaultTableModel) t3.getModel();
+            modelo.addRow(newrow);
+            t3.setModel(modelo);
+
+        }
+    }//GEN-LAST:event_a_yeiItemStateChanged
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+         if(t2.getSelectedRow()>=0){
+              DefaultTableModel modelo = (DefaultTableModel) t2.getModel();
+                modelo.removeRow(t2.getSelectedRow());
+                t2.setModel(modelo);
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        if(t3.getSelectedRow()>=0){
+              DefaultTableModel modelo = (DefaultTableModel) t3.getModel();
+                modelo.removeRow(t3.getSelectedRow());
+                t3.setModel(modelo);
+        }
+    }//GEN-LAST:event_jButton4MouseClicked
 
     /**
      * @param args the command line arguments
