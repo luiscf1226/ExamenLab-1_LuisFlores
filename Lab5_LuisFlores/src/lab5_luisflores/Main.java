@@ -89,7 +89,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         t2 = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
-        a_yeisons = new javax.swing.JComboBox<>();
+        a_yei = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         t3 = new javax.swing.JTable();
@@ -568,7 +568,7 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(104, 104, 104)
-                                .addComponent(a_yeisons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(a_yei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
                                 .addComponent(jScrollPane3))))
@@ -607,7 +607,7 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(a_yeisons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(a_yei, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(57, 57, 57)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(139, 139, 139))
@@ -695,7 +695,7 @@ public class Main extends javax.swing.JFrame {
 
     private void a_armasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_a_armasItemStateChanged
         // TODO add your handling code here:
-        
+
         if (evt.getStateChange() == 2) {
             Armas a = (Armas) a_armas.getSelectedItem();
             Object[] newrow = {
@@ -711,37 +711,37 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
-         //ELIMINAR
-         try {
-            if(t1.getSelectedRow()>=0){
-              DefaultTableModel modelo = (DefaultTableModel) t1.getModel();
+        //ELIMINAR
+        try {
+            if (t1.getSelectedRow() >= 0) {
+                DefaultTableModel modelo = (DefaultTableModel) t1.getModel();
                 modelo.removeRow(t1.getSelectedRow());
                 t1.setModel(modelo);
-        }
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Ocurrio un ERROR");
+            JOptionPane.showMessageDialog(this, "Ocurrio un ERROR");
         }
-        
+
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
         try {
-             if (t1.getSelectedRow() >= 0) {
+            if (t1.getSelectedRow() >= 0) {
                 DefaultTableModel modelo = (DefaultTableModel) t1.getModel();
 
                 String obj = JOptionPane.showInputDialog(this, "Ingrese nuevo Porcentaje  : ");
                 modelo.setValueAt(obj, t1.getSelectedRow(), 0);
-                String tipo=JOptionPane.showInputDialog(this, " Ingrese Nuevo Tipo Arma: ");
+                String tipo = JOptionPane.showInputDialog(this, " Ingrese Nuevo Tipo Arma: ");
                 modelo.setValueAt(tipo, t1.getSelectedRow(), 1);
                 t1.setModel(modelo);
             }
-         //MODIFICAR
-            
+            //MODIFICAR
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrio Error");
         }
-         
+
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void a_campistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_campistaMouseClicked
@@ -762,14 +762,59 @@ public class Main extends javax.swing.JFrame {
         a_viva.setEnabled(false);
         a_muerta.setEnabled(false);
         label9.setEnabled(false);
-          label10.setEnabled(true);
+        label10.setEnabled(true);
         a_cantidad.setEnabled(true);
     }//GEN-LAST:event_a_yeisonMouseClicked
 
     private void a_guardar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_guardar1MouseClicked
         // TODO add your handling code here:
         try {
-            
+            String nombre = a_nombre.getText();
+            int edad = Integer.parseInt(a_edad.getText());
+            String sexo = "";
+            if (a_men.isSelected()) {
+                sexo = "Masculino";
+            } else {
+                sexo = "Femenino";
+            }
+            Armas a = (Armas) cb_armas.getSelectedItem();
+            String tipo1 = "";
+            if (a_campista.isSelected()) {
+
+                if (a_super.isSelected()) {
+                    tipo1 = "SuperVisor";
+                } else {
+                    tipo1 = " Campista Normal";
+                }
+                String estado = "";
+                if (a_viva.isSelected()) {
+                    estado = "Viva";
+                } else {
+                    estado = "Muerte";
+                }
+                // public Campistas(String tipo, String estado, String nombre, int edad, String sexo, Armas arma)
+                Campistas c1 = new Campistas(tipo1, estado, nombre, edad, sexo, a);
+                listacamp.add(c1);
+                DefaultComboBoxModel modelo = (DefaultComboBoxModel) a_campistas.getModel();
+                modelo.addElement(c1);
+                a_campistas.setModel(modelo);
+                JOptionPane.showMessageDialog(this, "Campista Fue Creada Exitosamente");
+                a_nombre.setText("");
+                a_edad.setText("");
+            }
+            if (a_yeison.isSelected()) {
+                //public YeizonRecio(int cantidad, String nombre, int edad, String sexo, Armas arma)
+                int cant = Integer.parseInt(a_cantidad.getText());
+                YeizonRecio y1 = new YeizonRecio(cant, nombre, edad, sexo, a);
+                listayei.add(y1);
+                DefaultComboBoxModel modelo = (DefaultComboBoxModel) a_yei.getModel();
+                modelo.addElement(y1);
+                a_yei.setModel(modelo);
+                JOptionPane.showMessageDialog(this, "Yeizon el Recio Fue Creada Exitosamente");
+                a_nombre.setText("");
+                a_edad.setText("");
+            }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ocurrio un Error Intente De Nuevo");
         }
@@ -831,8 +876,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JRadioButton a_sierra;
     private javax.swing.JRadioButton a_super;
     private javax.swing.JRadioButton a_viva;
+    private javax.swing.JComboBox<String> a_yei;
     private javax.swing.JRadioButton a_yeison;
-    private javax.swing.JComboBox<String> a_yeisons;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
